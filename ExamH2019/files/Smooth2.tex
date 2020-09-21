@@ -1,0 +1,112 @@
+%!TEX TS-program =  latex
+\documentclass[runningheads]{llncs}
+\usepackage{amsmath}
+%\usepackage{lineno}
+%\linenumbers
+%\usepackage{geometry}
+%\geometry{a4paper}
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{pst-all}
+
+\DeclareMathOperator\Proj{Proj}
+\title{Color edge preserving smoothing II}
+\titlerunning{Color edge preserving smoothing II}
+\author{Ali Alsam, Russel Webb and Hans Jakob Rivertz}
+\institute{%
+%Department of Informatics and e-Learning(AITeL)\\
+%S\o r-Tr\o ndelag University College(HiST)\\
+%Trondheim, Norway\\
+%\email{---}\\
+%\email{hans.j.rivertz@hist.no}
+}
+
+%\email{h.j.rivertz@gmail.com}
+\date{Draft \today}                                           % Activate to display a given date or no date
+
+%% Conversion of images:
+% for a in *.jpg; do b=$(basename $a .jpg);convert $b.jpg $b.eps ;done
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\bilde#1#2#3#4{%
+	\subfigure[#3]{%
+   		\includegraphics[scale = #1]{#2.eps}%
+   		\label{fig:subfig_#4}%
+	}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcounter{imgcntr}
+\def\spacehack#1#2{#1#2}
+\def\bilder#1#2#3#4#5#6#7#8;{%
+	\setcounter{imgcntr}{1}
+	\def\dirpath{#1}%
+	\def\imname{#2}%
+	\def\midfix{#3}%
+	\def\imscale{#4}%
+	\def\alphavalue{#5}%
+	\def\betavalue{#6}%
+	\def\essvalue{#7}%
+	\spacehack\bildera#8,;}
+\def\bildera #1;{\ifx;#1;\else\bilderb#1;\fi}
+\def\bilderb #1,#2;{\ifx,#1,\newpage\else\bilderc#1;\fi
+                      \spacehack\bildera#2;}
+\def\bilderc #1;{\bilde{\imscale}{\dirpath/\imname-\midfix-#1_\essvalue_\alphavalue_\betavalue}{#1 iterations.}{\imname_#1_\essvalue_\alphavalue_\betavalue}%
+\addtocounter{imgcntr}{1}%
+\ifnum\value{imgcntr}=2 \setcounter{imgcntr}{0}
+
+\fi%
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\sbilder#1#2#3#4#5#6#7#8;{%
+	\setcounter{imgcntr}{1}
+	\def\dirpath{#1}%
+	\def\imname{#2}%
+	\def\midfix{#3}%
+	\def\imscale{#4}%
+	\def\alphavalue{#5}%
+	\def\betavalue{#6}%
+	\def\itervalue{#7}%
+	\spacehack\sbildera#8,;}
+\def\sbildera #1;{\ifx;#1;\else\sbilderb#1;\fi}
+\def\sbilderb #1,#2;{\ifx,#1,\newpage\else\sbilderc#1;\fi
+                      \spacehack\sbildera#2;}
+\def\sbilderc #1;{\bilde{\imscale}{\dirpath/\imname-\midfix-\itervalue_#1_\alphavalue_\betavalue}{With $s=#1$.}{\imname_\itervalue_#1_\alphavalue_\betavalue}%
+\addtocounter{imgcntr}{1}%
+\ifnum\value{imgcntr}=2 \setcounter{imgcntr}{0}
+
+\fi%
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% labels are named by:
+% fig:subfig_<image basename(#2)>_<s>_<alpha>_<beta>
+% fig:subfig_<image basename(#2)>_<number of iterations>_<s>_<alpha>_<beta>
+\newcommand{\billedserie}[7]{%
+	\subfigure[Original image]{%
+   		\includegraphics[scale = #4] {#1/#2/#2.eps}%
+   		\label{fig:subfig_#2_#7_#5_#6}%
+	}%
+	\bilder{#1/#2}{#2}{#3}{#4}{#5}{#6}{#7}
+}
+\newcommand{\sbilledserie}[7]{%
+	\subfigure[Original image]{%
+   		\includegraphics[scale = #4] {#1/#2/#2.eps}%
+   		\label{fig:subfig_#2_#7_#5_#6}%
+	}%
+	\sbilder{#1/#2}{#2}{#3}{#4}{#5}{#6}{#7}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\pagestyle{headings}
+\mainmatter
+\maketitle
+\nocite{*}
+%\input{abstract}
+%\input{introduction}
+\input{method}
+%\input{results}
+%\input{conclusion}
+%\bibliographystyle{splncs}
+%\bibliography{ref_scale}
+\end{document}

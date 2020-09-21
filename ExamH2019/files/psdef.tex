@@ -1,0 +1,70 @@
+%!TEX root =  Smooth1.tex
+\def\tripplefigure{
+\psset{unit=0.007cm,plotpoints=1000}
+\begin{pspicture*}(-250,-250)(250,250)
+%\psgrid[gridcolor=red,subgridcolor=green]
+\psclip{%
+\pscustom[linestyle=none]{%
+\SpecialCoor%
+\psline(250,250)(250,0)
+\psplot{250}{.001}{\lam\space neg \ess\space x x mul mul add 2 div x div}
+\psline(0,-250)(-250,-250)
+\psplot{-250}{-.001}{\lam\space neg \ess\space x x mul mul add 2 div x div}}
+}
+\psframe[fillcolor=lightgray,fillstyle=solid](-250,-250)(250,250)
+\psplot[linecolor=blue]{.001}{250}{\lam\space neg \ess\space x x mul mul add 2 div x div}
+\psplot[linecolor=red]{-250}{-.001}{\lam\space neg \ess\space x x mul mul add 2 div x div}
+\endpsclip
+\rput*[br](-120,180){$\tilde{P}_j$}
+\rput*[tr](240,-80){$\tilde{P}_i$}
+\psaxes[Dx=100,Dy=100]{->}(0,0)(-250,-250)(250,250)
+\psframe(-25,-25)(25,25)
+\end{pspicture*}{\ }
+%%%%%%%%%%%%%%%%
+\psset{unit=0.07cm,plotpoints=1000}
+\begin{pspicture*}(-25,-25)(25,25)
+%\psgrid[gridcolor=red,subgridcolor=green]
+\psclip{%
+\pscustom[linestyle=none]{%
+\SpecialCoor%
+\psline(25,25)(25,0)
+\psplot{25}{.001}{\lam\space neg \ess\space x x mul mul add 2 div x div}
+\psline(0,-25)(-25,-25)
+\psplot{-25}{-.001}{\lam\space neg \ess\space x x mul mul add 2 div x div}}
+}
+\psframe[fillcolor=lightgray,fillstyle=solid](-25,-25)(25,25)
+\psplot[linecolor=blue]{.001}{25}{\lam\space neg \ess\space x x mul mul add 2 div x div}
+\psplot[linecolor=red ]{-25}{-.001}{\lam\space neg \ess\space x x mul mul add 2 div x div}
+\endpsclip
+\rput*[br](-11,18){$\tilde{P}_j$}
+\rput*[tr](24,-8){$\tilde{P}_i$}
+\psaxes[Dx=10,Dy=10]{->}(0,0)(-25,-25)(25,25)
+\psframe(-25,-25)(25,25)
+\psframe(-5,-5)(5,5)
+\end{pspicture*}{\ }
+%%%%%%%%%%%%%
+\psset{unit=.35cm,plotpoints=1000}
+\begin{pspicture*}(-5,-5)(5,5)
+%\psgrid[gridcolor=red,subgridcolor=green]
+\psclip{%
+\pscustom[linestyle=none]{%
+\SpecialCoor%
+\psline(5,5)(5,0)
+\psplot{5}{.001}{\lam\space neg \ess\space x x mul mul add 2 div x div}
+\psline(0,-5)(-5,-5)
+\psplot{-5}{-.001}{\lam\space neg \ess\space x x mul mul add 2 div x div}}
+}
+\psframe[fillcolor=lightgray,fillstyle=solid](-5,-5)(5,5)
+\psplot[linecolor=blue]{.001}{5}{\lam\space neg \ess\space x x mul mul add 2 div x div}
+\psplot[linecolor=red ]{-5}{-.001}{\lam\space neg \ess\space x x mul mul add 2 div x div}
+\endpsclip
+\rput[br](-2.4,3.8){$\tilde{P}_j$}
+\rput[tr](4.9,-1.6){$\tilde{P}_i$}
+\psaxes*[Dx=2.0,Dy=2.0]{->}(0,0)(-5,-5)(5,5)
+\pcline[linewidth=0.1,linecolor=red]{<->}%
+(!\lam\space sqrt \ess\space dup mul 4 add sqrt sqrt div neg dup neg \ess\space dup mul 4 add sqrt \ess\space sub mul 2 div)%
+(!\lam\space sqrt \ess\space dup mul 4 add sqrt sqrt div dup neg \ess\space dup mul 4 add sqrt \ess\space sub mul 2 div)
+\ncput*[fillcolor=lightgray,nrot=:U]{$2\,a$}
+\psframe(-5,-5)(5,5)
+\end{pspicture*}\medskip
+}

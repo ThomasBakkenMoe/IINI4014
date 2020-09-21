@@ -1,0 +1,25 @@
+%!TEX root = Smooth1.tex
+\section{Introduction}
+The creation of a smoother image that retains the sharpness of its edges is a topic that has occupied researchers in image analysis and processing since the introduction of digital imaging devices%
+\cite{AlsamFarup11,Rudin:1992:NTV:142273.142312,AlsamRivertz11,Perona90scale-spaceand,Blomgren96colortv,Tschumperl-vector-valuedimage}.
+Generally speaking, smoothing an image is the process of successively removing high frequency information which is why the process is normally associated with noise reduction. While the association of image smoothing with noise reduction is natural it is not the only reason as to why we might wish to smooth an image. Image smoothing is indeed used in a wide number of applications including segmentation, image indexing, gamut mapping and image analysis.
+
+The process of successively removing high frequency information from an image is marred by difficulties due to the existing of edges that separate image regions and while we wish to remove an isolated pixel that is different from its surround we don't aim to remove a sharp edge. Edge preserving image smoothing is thus the process of removing variations in an image region while retaining the separation between regions of different colors and intensities- This is the balance all researchers and methods wish to strike.
+
+To smooth images within regions and avoid smoothing across edges we need to be able to define an edge. The identification of edges is thus an integral part of image smoothing algorithms. To address this issue, Peronna and Malik published a paper in 1990 on anisotropic diffusion~\cite{Perona90scale-spaceand}. The basic idea of the paper was that an image pixel is allowed to be diffused with its neighbors if the gradients between them are small. For gradients that are equal in magnitude in all directions, the method reduces to isotropic diffusion while for large gradients in specific direction, diffusion is restricted by a non-linear function of the strength of the gradient.
+
+Although a vast number of diffusion algorithms have been published since the introduction of anisotropic diffusion they still share the basic elements which are that smoothing should be allowed along edges but not across them. The difference between the algorithms is mainly the method employed to detect edges and the calculation of their strength which controls how much diffusion is allowed.
+
+
+In this paper, we introduce an algorithm with two main differences compared to the research papers that we have reviewed in preparation for our work. The first difference which encapsulates the first contribution of this work is a projection operation which decouples the influence of lightness from that of the chromaticity locally at the image pixel. This is achieved by firstly projecting the eight connected neighbors of a given pixel onto its three dimensional color vector. As a second step we calculate the difference vector between the original pixel and its component along the center color vector. In so doing, we were able to steer the diffusion process in two directions; one along the pixel and another that is orthogonal to it thus deciding the level of allowable color change.
+
+The second contribution of this paper, is the introduction of an algorithm that builds upon our previous method for edge preserving smoothing where we defined an edge by diffusing one of the four neighboring pixels in the horizontal and vertical directions towards the center pixel. We argued and demonstrated that diffusing in the direction of a large gradient causes small gradients in other directions to increase. Based on this we introduced a constraint that allowed diffusion on the condition that the magnitude of neighboring gradients does not increase beyond a threshold. In the context of the current work, we have implemented the same idea on the previously defined proposed color coordinates thus taking the work into the three dimensional color space.
+
+
+
+
+
+
+
+%
+

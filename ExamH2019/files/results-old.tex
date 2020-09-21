@@ -1,0 +1,75 @@
+%!TEX root =  Smooth1.tex
+\section{Results}
+Given the scale of the work required to provide sufficient evidence supporting the goodness of the proposed method and given the space limitation, we furnish in this section an initial proof of a working model and concept.
+
+In figure \ref{fig:woman}, we processed the female portrait with, 5, 10, 20, 50 and a 100. Here we notice that the information reduction after 5 iteration, targets isolated pixel values and the more we iterate the more similar pixels are merged into successively smoother surfaces while retaining large gradients, color information and form. 
+
+Similar results are seen in figure \ref{fig:three_women}, where the image of the three women results in a painting like representation after a 100 iterations while preserving the integrity of the objects and color saturation.
+
+The first two image series were processed with a fixed diffusion constant $s=0.1$. We know, however, that the more we diffuse towards a given color value the more we are likely to increase neighboring gradients and thus the more we will reject the diffusion (based on a given constant threshold). To demonstrate the effect of the diffusion constant on an image, we processed the third parrot image with the same thresholds and number of iterations but with an $s$ value that varied from 0.1-0.5. Here we observe that increasing the diffusion constant results in preserving finer gradients with the value of 0.3 representing a compromise that might serve for most applications. That said, we are currently experimenting with a variation of the algorithm that decides the diffusion constant locally.
+
+We compared the new method and the old method from~\cite{AlsamRivertz11}. The old method shows color artifacts if we use many iteration. The new method shows no color artifacts.
+See figure~\ref{fig:comparison}.
+
+  
+%It is simple to change the images.
+%Save an image in the folder code/<imgname>/
+%Run the last version of the program:
+%
+% > ./Smoothing -i <imgname>/<imgname>.jpg -t <alpha> -p <beta> -n <iterations>
+% In the folder code/<imgname>/ run the script
+% > for a in *.jpg; do b=$(basename $a .jpg);convert $b.jpg $b.eps ;done
+% For a series of images run:
+% for n in 5 10 20 50 100; do ./SmoothingMac -i 16_orig/16_orig.tif -t 25 -dt 0.5 -p 25 -n $n;done
+\begin{figure}
+	\centering
+	\subfigure[Original image]{%
+   		\includegraphics[scale = 1] {code/16_orig/origsmall.eps}%
+   		\label{fig:origsmall}%
+	}%
+	\subfigure[Old method]{%
+   		\includegraphics[scale = 1] {code/16_orig/origsmall-old.eps}%
+   		\label{fig:origsmallold}%
+	}%
+	\subfigure[New method]{%
+   		\includegraphics[scale = 1] {code/16_orig/origsmall-new.eps}%
+   		\label{fig:origsmallnew}%
+	}%
+	\caption{The color artifacts with the method in~\cite{AlsamRivertz11} disappears with the new method. We used 1000 iterations.}
+	\label{fig:comparison}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\billedserie{code}{woman}{AR13}{0.24}{25}{25}{0.1}%
+	5,10,20,50,100;
+	\caption{The original image is processed
+	with 5, 10, 20, 50 and 100 iterations respectively.
+	$\alpha$ and $\beta$ are both set to 25
+	and $s$ is set to $0.1$.}
+	\label{fig:woman}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\billedserie{code}{18_orig}{AR13}{0.24}{25}{25}{0.1}%
+	5,10,20,50,100;
+	\caption{The original image is processed
+	with 5, 10, 20, 50 and 100 iterations respectively.
+	$\alpha$ and $\beta$ are both set to 25
+	and $s$ is set to $0.1$.}
+	\label{fig:three_women}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\sbilledserie{code}{16_orig}{AR13}{0.2135}{25}{25}{100}%
+	0.1,0.2,0.3,0.4,0.5;
+	\caption{The original image is processed
+	with 100 iterations.
+	$\alpha$ and $\beta$ are both set to 25.
+	and $s$ is set to $0.1$, $0.2$, $0.3$, $0.4$ and $0.5$ respectively.}
+	\label{fig:parrots_s_variation}
+\end{figure}
+
+
